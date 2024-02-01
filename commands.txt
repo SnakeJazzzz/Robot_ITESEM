@@ -1,0 +1,5 @@
+Robot please move 5 blocks ahead.
+Robot please turn 90 degrees.
+Robot please move 3 blocks ahead and then turn 180 degrees.
+Robot please move 1 block ahead and then turn 360 degrees and move 2 blocks ahead.
+Robot please turn 270 degrees and then move 4 blocks ahead.
