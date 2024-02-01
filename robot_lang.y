@@ -8,7 +8,12 @@ int yylex(void);
 void process_command(char* action, int value);
 %}
 
-%token ROBOT PLEASE MOVE TURN NUMBER BLOCKS DEGREES AHEAD AND DOT EOL
+%union {
+    int num; // Union to hold different types, here only int for numbers.
+}
+
+%token <num> NUMBER
+%token ROBOT PLEASE MOVE TURN BLOCKS DEGREES AHEAD AND DOT EOL
 
 %%
 command:

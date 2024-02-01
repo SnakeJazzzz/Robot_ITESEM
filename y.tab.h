@@ -39,11 +39,11 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     ROBOT = 258,
-     PLEASE = 259,
-     MOVE = 260,
-     TURN = 261,
-     NUMBER = 262,
+     NUMBER = 258,
+     ROBOT = 259,
+     PLEASE = 260,
+     MOVE = 261,
+     TURN = 262,
      BLOCKS = 263,
      DEGREES = 264,
      AHEAD = 265,
@@ -53,11 +53,11 @@
    };
 #endif
 /* Tokens.  */
-#define ROBOT 258
-#define PLEASE 259
-#define MOVE 260
-#define TURN 261
-#define NUMBER 262
+#define NUMBER 258
+#define ROBOT 259
+#define PLEASE 260
+#define MOVE 261
+#define TURN 262
 #define BLOCKS 263
 #define DEGREES 264
 #define AHEAD 265
@@ -69,7 +69,14 @@
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+typedef union YYSTYPE
+#line 11 "robot_lang.y"
+{
+    int num; // Union to hold different types, here only int for numbers.
+}
+/* Line 1529 of yacc.c.  */
+#line 79 "y.tab.h"
+	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 # define YYSTYPE_IS_TRIVIAL 1

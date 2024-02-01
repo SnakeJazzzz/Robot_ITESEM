@@ -4,29 +4,22 @@
 
 %%
 
-[ \t]+               ; /* Ignore whitespace */
-
-Robot                { return ROBOT; }
-please               { return PLEASE; }
-
-move                 { return MOVE; }
-turn                 { return TURN; }
-
-[0-9]+               { yylval = atoi(yytext); return NUMBER; }
-
-"blocks"             { return BLOCKS; }
-"degrees"            | "degree" { return DEGREES; }
-
-ahead                { return AHEAD; }
-"and"                { return AND; }
-
-\.{1}                { return DOT; } /* Ensure only one period is matched */
-
-\n                   { return EOL; }
+"Robot"                         { return ROBOT; }
+"please"                        { return PLEASE; }
+"move"                          { return MOVE; }
+"blocks"                        { return BLOCKS; }
+"ahead"                         { return AHEAD; }
+"and"                           { return AND; }
+"turn"                          { return TURN; }
+"degrees"                       { return DEGREES; }
+[0-9]+                          { yylval.num = atoi(yytext); return NUMBER; }
+[\n]                            { return EOL; }
+[ \t]                           ; /* Ignore whitespace */
+.                               { return yytext[0]; }
 
 %%
 
-int yywrap() {
+int yywrap(void) {
     return 1;
 }
 

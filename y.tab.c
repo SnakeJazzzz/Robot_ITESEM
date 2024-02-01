@@ -66,11 +66,11 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     ROBOT = 258,
-     PLEASE = 259,
-     MOVE = 260,
-     TURN = 261,
-     NUMBER = 262,
+     NUMBER = 258,
+     ROBOT = 259,
+     PLEASE = 260,
+     MOVE = 261,
+     TURN = 262,
      BLOCKS = 263,
      DEGREES = 264,
      AHEAD = 265,
@@ -80,11 +80,11 @@
    };
 #endif
 /* Tokens.  */
-#define ROBOT 258
-#define PLEASE 259
-#define MOVE 260
-#define TURN 261
-#define NUMBER 262
+#define NUMBER 258
+#define ROBOT 259
+#define PLEASE 260
+#define MOVE 261
+#define TURN 262
 #define BLOCKS 263
 #define DEGREES 264
 #define AHEAD 265
@@ -126,7 +126,14 @@ void process_command(char* action, int value);
 #endif
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+typedef union YYSTYPE
+#line 11 "robot_lang.y"
+{
+    int num; // Union to hold different types, here only int for numbers.
+}
+/* Line 193 of yacc.c.  */
+#line 136 "y.tab.c"
+	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 # define YYSTYPE_IS_TRIVIAL 1
@@ -138,7 +145,7 @@ typedef int YYSTYPE;
 
 
 /* Line 216 of yacc.c.  */
-#line 142 "y.tab.c"
+#line 149 "y.tab.c"
 
 #ifdef short
 # undef short
@@ -353,7 +360,7 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  5
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   15
+#define YYLAST   17
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  14
@@ -414,15 +421,15 @@ static const yytype_uint8 yyprhs[] =
 /* YYRHS -- A `-1'-separated list of the rules' RHS.  */
 static const yytype_int8 yyrhs[] =
 {
-      15,     0,    -1,    16,    13,    -1,     3,     4,    17,    12,
+      15,     0,    -1,    16,    13,    -1,     4,     5,    17,    12,
       -1,    18,    -1,    17,    11,    18,    -1,    19,    -1,    20,
-      -1,     5,     7,     8,    10,    -1,     6,     7,     9,    -1
+      -1,     6,     3,     8,    10,    -1,     7,     3,     9,    -1
 };
 
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    15,    15,    19,    23,    24,    28,    29,    33,    37
+       0,    20,    20,    24,    28,    29,    33,    34,    38,    42
 };
 #endif
 
@@ -431,8 +438,8 @@ static const yytype_uint8 yyrline[] =
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "ROBOT", "PLEASE", "MOVE", "TURN",
-  "NUMBER", "BLOCKS", "DEGREES", "AHEAD", "AND", "DOT", "EOL", "$accept",
+  "$end", "error", "$undefined", "NUMBER", "ROBOT", "PLEASE", "MOVE",
+  "TURN", "BLOCKS", "DEGREES", "AHEAD", "AND", "DOT", "EOL", "$accept",
   "command", "polite_command", "action_list", "action", "move_action",
   "turn_action", 0
 };
@@ -481,15 +488,15 @@ static const yytype_int8 yydefgoto[] =
 #define YYPACT_NINF -10
 static const yytype_int8 yypact[] =
 {
-       1,     2,     5,    -6,    -5,   -10,   -10,     3,     4,    -9,
-     -10,   -10,   -10,     0,     6,    -5,   -10,    -1,   -10,   -10,
+       0,     1,     5,    -5,    -6,   -10,   -10,     4,     6,    -9,
+     -10,   -10,   -10,     2,     3,    -6,   -10,     7,   -10,   -10,
      -10
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -10,   -10,   -10,   -10,    -3,   -10,   -10
+     -10,   -10,   -10,   -10,    -4,   -10,   -10
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
@@ -499,22 +506,22 @@ static const yytype_int8 yypgoto[] =
 #define YYTABLE_NINF -1
 static const yytype_uint8 yytable[] =
 {
-       7,     8,    15,    16,     1,     5,     4,     6,    17,    20,
-      13,    14,    19,     0,     0,    18
+       7,     8,    15,    16,     1,     5,     4,    13,     6,    14,
+      17,    19,    18,     0,     0,     0,     0,    20
 };
 
 static const yytype_int8 yycheck[] =
 {
-       5,     6,    11,    12,     3,     0,     4,    13,     8,    10,
-       7,     7,    15,    -1,    -1,     9
+       6,     7,    11,    12,     4,     0,     5,     3,    13,     3,
+       8,    15,     9,    -1,    -1,    -1,    -1,    10
 };
 
 /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
    symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,     3,    15,    16,     4,     0,    13,     5,     6,    17,
-      18,    19,    20,     7,     7,    11,    12,     8,     9,    18,
+       0,     4,    15,    16,     5,     0,    13,     6,     7,    17,
+      18,    19,    20,     3,     3,    11,    12,     8,     9,    18,
       10
 };
 
@@ -1330,23 +1337,23 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 15 "robot_lang.y"
+#line 20 "robot_lang.y"
     { printf("Command processed.\n"); }
     break;
 
   case 8:
-#line 33 "robot_lang.y"
-    { process_command("MOVE", (yyvsp[(2) - (4)])); }
+#line 38 "robot_lang.y"
+    { process_command("MOVE", (yyvsp[(2) - (4)].num)); }
     break;
 
   case 9:
-#line 37 "robot_lang.y"
-    { process_command("TURN", (yyvsp[(2) - (3)])); }
+#line 42 "robot_lang.y"
+    { process_command("TURN", (yyvsp[(2) - (3)].num)); }
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1350 "y.tab.c"
+#line 1357 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1560,7 +1567,7 @@ yyreturn:
 }
 
 
-#line 40 "robot_lang.y"
+#line 45 "robot_lang.y"
 
 
 void yyerror(char *s) {
