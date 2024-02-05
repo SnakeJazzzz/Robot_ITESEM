@@ -9,11 +9,11 @@ void process_command(char* action, int value);
 %}
 
 %union {
-    int num; // Union to hold different types, here only int for numbers.
+    int num;
 }
 
 %token <num> NUMBER
-%token ROBOT PLEASE MOVE TURN BLOCKS DEGREES AHEAD AND DOT EOL
+%token ROBOT PLEASE MOVE TURN BLOCKS DEGREES AHEAD AND DOT EOL THEN
 
 %%
 command:
@@ -26,7 +26,12 @@ polite_command:
 
 action_list:
     action
-    | action_list AND action
+    | action_list AND optional_then action
+    ;
+
+optional_then:
+    /* Empty */
+    | THEN
     ;
 
 action:
@@ -63,3 +68,5 @@ int main(void) {
     yyparse();
     return 0;
 }
+
+
