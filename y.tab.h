@@ -77,7 +77,7 @@ typedef union YYSTYPE
     int num;
 }
 /* Line 1529 of yacc.c.  */
-#line 81 "robot_lang.tab.h"
+#line 81 "y.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

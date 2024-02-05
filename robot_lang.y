@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "robot_lang.tab.h"
+#include "y.tab.h"
 
 FILE *asmFile;
 

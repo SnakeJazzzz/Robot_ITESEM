@@ -103,7 +103,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "robot_lang.tab.h"
+#include "y.tab.h"
 
 FILE *asmFile;
 
@@ -140,7 +140,7 @@ typedef union YYSTYPE
     int num;
 }
 /* Line 193 of yacc.c.  */
-#line 144 "robot_lang.tab.c"
+#line 144 "y.tab.c"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
@@ -153,7 +153,7 @@ typedef union YYSTYPE
 
 
 /* Line 216 of yacc.c.  */
-#line 157 "robot_lang.tab.c"
+#line 157 "y.tab.c"
 
 #ifdef short
 # undef short
@@ -1352,27 +1352,27 @@ yyreduce:
     {
         case 4:
 #line 30 "robot_lang.y"
-    { printf("Command processed with a dot.\n"); ;}
+    { printf("Command processed with a dot.\n"); }
     break;
 
   case 5:
 #line 31 "robot_lang.y"
-    { printf("Command processed without a dot.\n"); ;}
+    { printf("Command processed without a dot.\n"); }
     break;
 
   case 13:
 #line 54 "robot_lang.y"
-    { process_command("MOVE", (yyvsp[(2) - (4)].num)); ;}
+    { process_command("MOVE", (yyvsp[(2) - (4)].num)); }
     break;
 
   case 14:
 #line 58 "robot_lang.y"
-    { process_command("TURN", (yyvsp[(2) - (3)].num)); ;}
+    { process_command("TURN", (yyvsp[(2) - (3)].num)); }
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1376 "robot_lang.tab.c"
+#line 1376 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);

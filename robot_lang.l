@@ -1,5 +1,5 @@
 %{
-#include "robot_lang.tab.h"
+#include "y.tab.h"
 %}
 
 %%

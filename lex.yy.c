@@ -472,7 +472,7 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "robot_lang.l"
 #line 2 "robot_lang.l"
-#include "robot_lang.tab.h"
+#include "y.tab.h"
 #line 476 "lex.yy.c"
 #line 477 "lex.yy.c"
 
