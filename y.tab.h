@@ -49,7 +49,8 @@
      AHEAD = 265,
      AND = 266,
      DOT = 267,
-     EOL = 268
+     EOL = 268,
+     THEN = 269
    };
 #endif
 /* Tokens.  */
@@ -64,6 +65,7 @@
 #define AND 266
 #define DOT 267
 #define EOL 268
+#define THEN 269
 
 
 
@@ -72,10 +74,10 @@
 typedef union YYSTYPE
 #line 11 "robot_lang.y"
 {
-    int num; // Union to hold different types, here only int for numbers.
+    int num;
 }
 /* Line 1529 of yacc.c.  */
-#line 79 "y.tab.h"
+#line 81 "y.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
