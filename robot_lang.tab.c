@@ -75,9 +75,9 @@
      DEGREES = 264,
      AHEAD = 265,
      AND = 266,
-     DOT = 267,
-     EOL = 268,
-     THEN = 269
+     EOL = 267,
+     THEN = 268,
+     DOT = 269
    };
 #endif
 /* Tokens.  */
@@ -90,9 +90,9 @@
 #define DEGREES 264
 #define AHEAD 265
 #define AND 266
-#define DOT 267
-#define EOL 268
-#define THEN 269
+#define EOL 267
+#define THEN 268
+#define DOT 269
 
 
 
@@ -101,12 +101,18 @@
 #line 1 "robot_lang.y"
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-#include "y.tab.h"
+#include "robot_lang.tab.h"
 
-void yyerror(char *s);
+FILE *asmFile;
+
 int yylex(void);
+void yyerror(const char *s);
+void open_asm_file();
+void close_asm_file();
 void process_command(char* action, int value);
+
 
 
 /* Enabling traces.  */
@@ -129,12 +135,12 @@ void process_command(char* action, int value);
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 11 "robot_lang.y"
+#line 17 "robot_lang.y"
 {
     int num;
 }
 /* Line 193 of yacc.c.  */
-#line 138 "y.tab.c"
+#line 144 "robot_lang.tab.c"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
@@ -147,7 +153,7 @@ typedef union YYSTYPE
 
 
 /* Line 216 of yacc.c.  */
-#line 151 "y.tab.c"
+#line 157 "robot_lang.tab.c"
 
 #ifdef short
 # undef short
@@ -360,18 +366,18 @@ union yyalloc
 #endif
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  5
+#define YYFINAL  2
 /* YYLAST -- Last index in YYTABLE.  */
 #define YYLAST   17
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  15
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  8
+#define YYNNTS  9
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  11
+#define YYNRULES  14
 /* YYNRULES -- Number of states.  */
-#define YYNSTATES  23
+#define YYNSTATES  25
 
 /* YYTRANSLATE(YYLEX) -- Bison symbol number corresponding to YYLEX.  */
 #define YYUNDEFTOK  2
@@ -417,24 +423,25 @@ static const yytype_uint8 yytranslate[] =
    YYRHS.  */
 static const yytype_uint8 yyprhs[] =
 {
-       0,     0,     3,     6,    11,    13,    18,    19,    21,    23,
-      25,    30
+       0,     0,     3,     4,     7,    11,    14,    18,    20,    25,
+      26,    28,    30,    32,    37
 };
 
 /* YYRHS -- A `-1'-separated list of the rules' RHS.  */
 static const yytype_int8 yyrhs[] =
 {
-      16,     0,    -1,    17,    13,    -1,     4,     5,    18,    12,
-      -1,    20,    -1,    18,    11,    19,    20,    -1,    -1,    14,
-      -1,    21,    -1,    22,    -1,     6,     3,     8,    10,    -1,
-       7,     3,     9,    -1
+      16,     0,    -1,    -1,    16,    17,    -1,    18,    14,    12,
+      -1,    18,    12,    -1,     4,     5,    19,    -1,    21,    -1,
+      19,    11,    20,    21,    -1,    -1,    13,    -1,    22,    -1,
+      23,    -1,     6,     3,     8,    10,    -1,     7,     3,     9,
+      -1
 };
 
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    20,    20,    24,    28,    29,    32,    34,    38,    39,
-      43,    47
+       0,    25,    25,    26,    30,    31,    35,    39,    40,    43,
+      45,    49,    50,    54,    58
 };
 #endif
 
@@ -444,9 +451,9 @@ static const yytype_uint8 yyrline[] =
 static const char *const yytname[] =
 {
   "$end", "error", "$undefined", "NUMBER", "ROBOT", "PLEASE", "MOVE",
-  "TURN", "BLOCKS", "DEGREES", "AHEAD", "AND", "DOT", "EOL", "THEN",
-  "$accept", "command", "polite_command", "action_list", "optional_then",
-  "action", "move_action", "turn_action", 0
+  "TURN", "BLOCKS", "DEGREES", "AHEAD", "AND", "EOL", "THEN", "DOT",
+  "$accept", "commands", "command", "polite_command", "action_list",
+  "optional_then", "action", "move_action", "turn_action", 0
 };
 #endif
 
@@ -463,15 +470,15 @@ static const yytype_uint16 yytoknum[] =
 /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,    15,    16,    17,    18,    18,    19,    19,    20,    20,
-      21,    22
+       0,    15,    16,    16,    17,    17,    18,    19,    19,    20,
+      20,    21,    21,    22,    23
 };
 
 /* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
-       0,     2,     2,     4,     1,     4,     0,     1,     1,     1,
-       4,     3
+       0,     2,     0,     2,     3,     2,     3,     1,     4,     0,
+       1,     1,     1,     4,     3
 };
 
 /* YYDEFACT[STATE-NAME] -- Default rule to reduce with in state
@@ -479,31 +486,31 @@ static const yytype_uint8 yyr2[] =
    means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       0,     0,     0,     0,     0,     1,     2,     0,     0,     0,
-       4,     8,     9,     0,     0,     6,     3,     0,    11,     7,
-       0,    10,     5
+       2,     0,     1,     0,     3,     0,     0,     5,     0,     0,
+       0,     6,     7,    11,    12,     4,     0,     0,     9,     0,
+      14,    10,     0,    13,     8
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     2,     3,     9,    20,    10,    11,    12
+      -1,     1,     4,     5,    11,    22,    12,    13,    14
 };
 
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
    STATE-NUM.  */
-#define YYPACT_NINF -10
+#define YYPACT_NINF -12
 static const yytype_int8 yypact[] =
 {
-       0,     1,     5,    -5,    -6,   -10,   -10,     4,     6,    -9,
-     -10,   -10,   -10,     2,     3,    -3,   -10,     7,   -10,   -10,
-      -6,   -10,   -10
+     -12,     0,   -12,    -3,   -12,   -11,    -1,   -12,    -5,     5,
+       6,     1,   -12,   -12,   -12,   -12,     2,     4,    -2,     7,
+     -12,   -12,    -1,   -12,   -12
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -10,   -10,   -10,   -10,   -10,    -7,   -10,   -10
+     -12,   -12,   -12,   -12,   -12,   -12,    -8,   -12,   -12
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
@@ -513,23 +520,23 @@ static const yytype_int8 yypgoto[] =
 #define YYTABLE_NINF -1
 static const yytype_uint8 yytable[] =
 {
-       7,     8,    15,    16,     1,     5,     4,    13,     6,    14,
-      17,    19,    18,    22,     0,     0,     0,    21
+       2,     7,     6,     8,     3,     9,    10,    15,    16,    17,
+      19,    21,    18,    20,    24,     0,     0,    23
 };
 
 static const yytype_int8 yycheck[] =
 {
-       6,     7,    11,    12,     4,     0,     5,     3,    13,     3,
-       8,    14,     9,    20,    -1,    -1,    -1,    10
+       0,    12,     5,    14,     4,     6,     7,    12,     3,     3,
+       8,    13,    11,     9,    22,    -1,    -1,    10
 };
 
 /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
    symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,     4,    16,    17,     5,     0,    13,     6,     7,    18,
-      20,    21,    22,     3,     3,    11,    12,     8,     9,    14,
-      19,    10,    20
+       0,    16,     0,     4,    17,    18,     5,    12,    14,     6,
+       7,    19,    21,    22,    23,    12,     3,     3,    11,     8,
+       9,    13,    20,    10,    21
 };
 
 #define yyerrok		(yyerrstatus = 0)
@@ -1343,24 +1350,29 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-        case 2:
-#line 20 "robot_lang.y"
-    { printf("Command processed.\n"); }
+        case 4:
+#line 30 "robot_lang.y"
+    { printf("Command processed with a dot.\n"); ;}
     break;
 
-  case 10:
-#line 43 "robot_lang.y"
-    { process_command("MOVE", (yyvsp[(2) - (4)].num)); }
+  case 5:
+#line 31 "robot_lang.y"
+    { printf("Command processed without a dot.\n"); ;}
     break;
 
-  case 11:
-#line 47 "robot_lang.y"
-    { process_command("TURN", (yyvsp[(2) - (3)].num)); }
+  case 13:
+#line 54 "robot_lang.y"
+    { process_command("MOVE", (yyvsp[(2) - (4)].num)); ;}
+    break;
+
+  case 14:
+#line 58 "robot_lang.y"
+    { process_command("TURN", (yyvsp[(2) - (3)].num)); ;}
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1364 "y.tab.c"
+#line 1376 "robot_lang.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1574,28 +1586,40 @@ yyreturn:
 }
 
 
-#line 50 "robot_lang.y"
+#line 61 "robot_lang.y"
 
 
-void yyerror(char *s) {
-    fprintf(stderr, "Error: %s\n", s);
-}
-
-void process_command(char* action, int value) {
-    if(strcmp(action, "MOVE") == 0) {
-        printf("Move %d blocks.\n", value);
-    } else if(strcmp(action, "TURN") == 0) {
-        printf("Turn %d degrees.\n", value);
-    } else {
-        printf("Unknown action.\n");
+void open_asm_file() {
+    asmFile = fopen("instructions.asm", "w");
+    if (asmFile == NULL) {
+        fprintf(stderr, "Could not open instructions.asm for writing.\n");
+        exit(1);
     }
 }
 
-int main(void) {
-    printf("Please enter a command:\n");
-    yyparse();
-    return 0;
+void close_asm_file() {
+    if (asmFile) {
+        fclose(asmFile);
+    }
 }
 
+void process_command(char* action, int value) {
+    if (strcmp(action, "MOVE") == 0) {
+        fprintf(asmFile, "MOV,%d\n", value);
+    } else if (strcmp(action, "TURN") == 0) {
+        fprintf(asmFile, "TURN,%d\n", value);
+    }
+}
 
+void yyerror(const char *s) {
+    extern char *yytext;
+    fprintf(stderr, "Error: %s at symbol \"%s\"\n", s, yytext);
+}
 
+int main(void) {
+    open_asm_file();
+    printf("Please enter a command:\n");
+    yyparse();
+    close_asm_file();
+    return 0;
+}

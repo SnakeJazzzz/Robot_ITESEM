@@ -1,5 +1,5 @@
 %{
-#include "y.tab.h"
+#include "robot_lang.tab.h"
 %}
 
 %%
@@ -10,8 +10,10 @@
 "blocks"                        { return BLOCKS; }
 "ahead"                         { return AHEAD; }
 "and"                           { return AND; }
+"then"                          { return THEN; }
 "turn"                          { return TURN; }
 "degrees"                       { return DEGREES; }
+"."                             { return DOT; }
 [0-9]+                          { yylval.num = atoi(yytext); return NUMBER; }
 [\n]                            { return EOL; }
 [ \t]                           ; /* Ignore whitespace */
@@ -22,4 +24,3 @@
 int yywrap(void) {
     return 1;
 }
-

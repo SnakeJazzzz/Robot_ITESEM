@@ -48,9 +48,9 @@
      DEGREES = 264,
      AHEAD = 265,
      AND = 266,
-     DOT = 267,
-     EOL = 268,
-     THEN = 269
+     EOL = 267,
+     THEN = 268,
+     DOT = 269
    };
 #endif
 /* Tokens.  */
@@ -63,21 +63,21 @@
 #define DEGREES 264
 #define AHEAD 265
 #define AND 266
-#define DOT 267
-#define EOL 268
-#define THEN 269
+#define EOL 267
+#define THEN 268
+#define DOT 269
 
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 11 "robot_lang.y"
+#line 17 "robot_lang.y"
 {
     int num;
 }
 /* Line 1529 of yacc.c.  */
-#line 81 "y.tab.h"
+#line 81 "robot_lang.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
