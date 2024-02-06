@@ -38,14 +38,14 @@ V = {commands, command, polite_command, action_list, optional_then, action, move
 Σ = {ROBOT, PLEASE, MOVE, TURN, NUMBER, BLOCKS, AHEAD, DEGREES, AND, THEN, DOT, EOL}
 
 R= 
-commands 	    →  commands command | ε
-command 	    → polite_command DOT EOL | polite_command EOL
-polite_command → ROBOT PLEASE action_list
-action_list           → action | action_list AND optional_then action
-optional_then      → ε | THEN
-action                  → move_action | turn_action
-move_action       → MOVE NUMBER BLOCKS AHEAD
-turn_action         → TURN NUMBER DEGREES
+- commands 	    →  commands command | ε
+- command 	    → polite_command DOT EOL | polite_command EOL
+- polite_command → ROBOT PLEASE action_list
+- action_list           → action | action_list AND optional_then action
+- optional_then      → ε | THEN
+- action                  → move_action | turn_action
+- move_action       → MOVE NUMBER BLOCKS AHEAD
+- turn_action         → TURN NUMBER DEGREES
 
 S = commands
 
