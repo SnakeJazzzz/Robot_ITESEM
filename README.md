@@ -14,6 +14,43 @@ The CPU simulator logic is specified using Flex and Bison. Flex generates a lexi
 
 The context-free grammar (CFG) defines the structure of valid sentences in the robot language. Lexemes are defined using regular expressions in Flex to recognize keywords, numbers, and directions.
 
+## Tokens
+"Robot"                         { return ROBOT; }
+"please"                        { return PLEASE; }
+"move"                          { return MOVE; }
+"blocks"                        { return BLOCKS; }
+"ahead"                         { return AHEAD; }
+"and"                           { return AND; }
+"then"                          { return THEN; }
+"turn"                          { return TURN; }
+"degrees"                       { return DEGREES; }
+"."                             { return DOT; }
+[0-9]+                          { yylval.num = atoi(yytext); return NUMBER; }
+[\n]                            { return EOL; }
+[ \t]                           ; /* Ignore whitespace */
+.                               { return yytext[0]; }
+
+## CFG
+G = {V, Σ, R, S }
+
+V = {commands, command, polite_command, action_list, optional_then, action, move_action, turn_action}
+
+Σ = {ROBOT, PLEASE, MOVE, TURN, NUMBER, BLOCKS, AHEAD, DEGREES, AND, THEN, DOT, EOL}
+
+R= 
+commands 	    →  commands command | ε
+command 	    → polite_command DOT EOL | polite_command EOL
+polite_command → ROBOT PLEASE action_list
+action_list           → action | action_list AND optional_then action
+optional_then      → ε | THEN
+action                  → move_action | turn_action
+move_action       → MOVE NUMBER BLOCKS AHEAD
+turn_action         → TURN NUMBER DEGREES
+
+S = commands
+
+
+
 ## List of Sample Inputs
 
 ### Valid Sentences:
